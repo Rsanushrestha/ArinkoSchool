@@ -8,6 +8,9 @@ import LoginScreen from '../Components/Login/LoginScreen';
 // import {AuthProvider} from './Src/Components/Context/AuthContext';
 import HomeScreen from '../Components/Screen/HomeScreen';
 import {AuthContext} from '../Components/Context/AuthContext';
+import Icons from '../Components/Screen/Icons';
+import ProfileScreen from '../Components/Screen/ProfileScreen';
+import NotificationScreen from '../Components/Screen/NotificationScreen';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -19,21 +22,25 @@ const Navigation = () => {
         initialRouteName="Splash"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#000E28',
+            backgroundColor: 'gray',
           },
-          headerTintColor: '#637381',
         }}>
-        {splashLoading ? (
-          <Stack.Screen
-            name="Splash"
-            component={SplashScreen}
-            options={{headerShown: false}}
-          />
-        ) : userInfo ? (
+        {userInfo && userInfo.token ? (
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{headerShown: false}}
+            // options={{headerShown: false}}
+            options={{
+              title: 'Dashboard',
+              headerTitleAlign: 'center',
+              headerTintColor: 'black',
+
+              headerBackVisible: false,
+              headerStyle: {
+                backgroundColor: '#fff',
+              },
+              headerRight: () => <Icons />,
+            }}
           />
         ) : (
           <>
@@ -44,6 +51,11 @@ const Navigation = () => {
                 title: 'Login',
 
                 headerBackVisible: false,
+                headerTintColor: 'white',
+
+                headerStyle: {
+                  backgroundColor: '#000E28',
+                },
 
                 headerTitleAlign: 'center',
                 headerTitleStyle: {
@@ -51,9 +63,23 @@ const Navigation = () => {
                 },
               }}
             />
+            <Stack.Screen
+              name="Splash"
+              component={SplashScreen}
+              options={{headerShown: false}}
+            />
           </>
         )}
-
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={NotificationScreen}
+          options={{headerShown: false}}
+        />
         {/* <Stack.Screen
             name="Signup"
             component={SignupScreen}

@@ -17,10 +17,11 @@ const LoginScreen = props => {
   const {navigation} = props;
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const {isloading, login} = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
+
   return (
     <View style={styles.container}>
-      <Spinner visible={isloading} />
+      {/* <Spinner visible={isloading} /> */}
       <Text style={styles.login}>ARNIKO {'\n'}International Academy</Text>
       <Text style={styles.txt}>
         Enter your email and {'\n'}password to log in.
